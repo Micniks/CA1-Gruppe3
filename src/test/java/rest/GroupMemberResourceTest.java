@@ -96,59 +96,15 @@ public class GroupMemberResourceTest {
         .body("msg", equalTo("Hello World"));   
     }
     
-//    @Test
-//    public void testCount() throws Exception {
-//        given()
-//        .contentType("application/json")
-//        .get("/movie/count").then()
-//        .assertThat()
-//        .statusCode(HttpStatus.OK_200.getStatusCode())
-//        .body("count", equalTo(5));   
-//    }
-//    
-//    @Test
-//    public void testAll() throws Exception {
-//        given()
-//        .contentType("application/json")
-//        .get("/movie/all")
-//        .then()
-//        .log().body()
-//        .assertThat()
-//        .statusCode(HttpStatus.OK_200.getStatusCode())
-//        .body("[0].actors", hasItem("Chuck Norris"));   
-//    }
-//    
-//    @Test
-//    public void testName() throws Exception {
-//        given()
-//        .contentType("application/json")
-//        .get("movie/name/"+m3.getName())
-//        .then()
-//        .assertThat()
-//        .statusCode(HttpStatus.OK_200.getStatusCode())
-//        .body("[0].name", equalTo(m3.getName()));   
-//    }
-//    
-//    @Test
-//    public void testNoName() throws Exception {
-//        given()
-//        .contentType("application/json")
-//        .get("movie/name/NoSuchNameListThis")
-//        .then()
-//        .assertThat()
-//        .statusCode(HttpStatus.OK_200.getStatusCode())
-//        .body(equalTo("[]"));   
-//    }
-//    
-//    @Test
-//    public void testID() throws Exception {
-//        
-//        given()
-//        .contentType("application/json")
-//        .get("movie/id/"+m1.getId().toString())
-//        .then()
-//        .assertThat()
-//        .statusCode(HttpStatus.OK_200.getStatusCode())
-//        .body("name", equalTo(m1.getName()));   
-//    }
+    @Test
+    public void testAll() throws Exception {
+        given()
+        .contentType("application/json")
+        .get("/groupmember/all")
+        .then()
+        .log().body()
+        .assertThat()
+        .statusCode(HttpStatus.OK_200.getStatusCode())
+        .body("[0].name", hasItem("Andreas"));   
+    }
 }
