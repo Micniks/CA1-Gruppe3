@@ -7,7 +7,7 @@
 function changeText(evt) {
 
     evt.preventDefault();
-    let url = "api/groupmembers/all";
+    let url = "api/groupmember/all";
     fetch(url)
             .then(res => res.json())
             .then(data => {
