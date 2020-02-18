@@ -4,7 +4,7 @@ function clicker(evt){
 }
 
 function changeText() {
-    let url = "api/groupmember/all";
+    let url = "api/cars/all";
     fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -20,20 +20,11 @@ function insertIntoTableHeaders(map) {
 }
 ;
 
-function insertIntoTableFooters(names) {
+function insertIntoTableFooters(cars) {
     let htmlRows = "<tr>";
-    names.forEach(e => {
+    cars.forEach(e => {
         let temp = Object.values(e).map(function (a) {
-            if(a ==="Green") {
-                return "<td style='background-color:Lime;'>" + a + "</td>";
-            } else if(a==="Yellow") {
-                return "<td style='background-color:Yellow;'>" + a + "</td>";
-            } else if(a==="Red"){
-                return "<td style='background-color:Red;'>" + a + "</td>";
-            } else {
-                return "<td>" + a + "</td>";
-            }
-            
+            return "<td>" + a + "</td>";
         }).join("") + "</tr>";
         htmlRows += temp;
     });
@@ -43,4 +34,3 @@ function insertIntoTableFooters(names) {
 ;
 
 changeText();
-document.getElementById("rldBtn").addEventListener("click", clicker);
