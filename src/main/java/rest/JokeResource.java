@@ -24,8 +24,6 @@ public class JokeResource {
             "ax2",
             EMF_Creator.Strategy.CREATE);
 
-    //An alternative way to get the EntityManagerFactory, whithout having to type the details all over the code
-    //EMF = EMF_Creator.createEntityManagerFactory(DbSelector.DEV, Strategy.CREATE);
     private static final JokeFacade FACADE = JokeFacade.getFacadeExample(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 

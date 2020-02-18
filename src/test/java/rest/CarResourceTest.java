@@ -1,6 +1,6 @@
 package rest;
 
-import entities.GroupMember;
+import entities.Car;
 import utils.EMF_Creator;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
@@ -21,18 +21,16 @@ import org.junit.jupiter.api.Test;
 import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
 
-public class GroupMemberResourceTest {
+public class CarResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    private static GroupMember m1,m2,m3,m4;
+    private static Car c1,c2,c3,c4,c5;
     
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
     private static EntityManagerFactory emf;
     
-    
-
     static HttpServer startServer() {
         ResourceConfig rc = ResourceConfig.forApplication(new ApplicationConfig());
         return GrizzlyHttpServerFactory.createHttpServer(BASE_URI, rc);
@@ -58,17 +56,19 @@ public class GroupMemberResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        m1 = new GroupMember("Andreas", "cph-ap294", "Green");
-        m2 = new GroupMember("Cahit", "cph-cb342", "Green");
-        m3 = new GroupMember("Marcus", "cph-mj734", "Yellow");
-        m4 = new GroupMember("Michael", "cph-mk548", "Red");
+        c1 = new Car(1983, "Volvo","242 Turbo Evo", 85500, "Red");
+        c2 = new Car(1995, "Nissan", "Skyline R33 GTR", 120000, "Midnight Purple");
+        c3 = new Car(2020, "Ford","F-150 Raptor",450000, "Blue");
+        c4 = new Car(2020, "Jeep", "Cherokee Trackhawk", 63000, "Bourdeaux");
+        c5 = new Car(1986, "BMW", "325i E30", 5000, "White");
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("GroupMember.deleteAllRows").executeUpdate();
-            em.persist(m1);
-            em.persist(m2); 
-            em.persist(m3);
-            em.persist(m4);
+            em.createNamedQuery("Car.deleteAllRows").executeUpdate();
+            em.persist(c1);
+            em.persist(c2); 
+            em.persist(c3);
+            em.persist(c4);
+            em.persist(c5);
             em.getTransaction().commit();
         } finally { 
             em.close();
@@ -78,28 +78,28 @@ public class GroupMemberResourceTest {
     @Test
     public void testServerIsUp() {
         System.out.println("Testing is server UP");
-        given().when().get("/groupmember").then().statusCode(200);
+        given().when().get("/car").then().statusCode(200);
     }
    
     @Test
     public void testDummyMsg() throws Exception {
         given()
         .contentType("application/json")
-        .get("/groupmember/").then()
+        .get("/car/").then()
         .assertThat()
         .statusCode(HttpStatus.OK_200.getStatusCode())
         .body("msg", equalTo("Hello World"));   
     }
     
     @Test
-    public void testGetAllGroupMembers() throws Exception {
+    public void testGetAllCars() throws Exception {
         given()
         .contentType("application/json")
-        .get("/groupmember/all")
+        .get("/car/all")
         .then()
         .log().body()
         .assertThat()
         .statusCode(HttpStatus.OK_200.getStatusCode())
-        .body("[1].name", equalTo("Cahit"));   
+        .body("[1].model", equalTo("325i E30"));   
     }
 }

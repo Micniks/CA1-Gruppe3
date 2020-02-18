@@ -4,6 +4,7 @@
   <persistence-unit name="pu" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>entities.GroupMember</class>
+    <class>entities.Car</class>
     <class>entities.Joke</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
