@@ -1,6 +1,8 @@
 package dto;
 
 import entities.GroupMember;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GroupMemberDTO {
 
@@ -10,10 +12,10 @@ public class GroupMemberDTO {
     private String color;
 
     public GroupMemberDTO(GroupMember groupMember) {
-        this.id = id;
-        this.name = name;
-        this.studentID = studentID;
-        this.color = color;
+        this.id = groupMember.getId();
+        this.name = groupMember.getName();
+        this.studentID = groupMember.getStudentID();
+        this.color = groupMember.getColor();
     }
 
     public Long getId() {
@@ -30,6 +32,16 @@ public class GroupMemberDTO {
 
     public String getColor() {
         return color;
+    }
+    
+    public static List<GroupMemberDTO> convertList(List<GroupMember> list){
+        List<GroupMemberDTO> result = new ArrayList<GroupMemberDTO>();
+        
+        for (GroupMember groupMember : list) {
+            result.add(new GroupMemberDTO(groupMember));
+        }
+        
+        return result;
     }
 
 }
