@@ -105,6 +105,6 @@ public class GroupMemberResourceTest {
         .log().body()
         .assertThat()
         .statusCode(HttpStatus.OK_200.getStatusCode())
-        .body("[0].name", hasItem("Andreas"));   
+        .body("[1].name", equalTo("Cahit"));   
     }
 }

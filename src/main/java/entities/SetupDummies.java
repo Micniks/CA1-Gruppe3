@@ -43,10 +43,10 @@ public class SetupDummies {
         GroupMember gm2 = new GroupMember("Cahit", "cph-cb342", "Green");
         GroupMember gm3 = new GroupMember("Marcus", "cph-mj734", "Yellow");
         GroupMember gm4 = new GroupMember("Michael", "cph-mk548", "Red");
-        FACADE.addMovie(gm1);
-        FACADE.addMovie(gm2);
-        FACADE.addMovie(gm3);
-        FACADE.addMovie(gm4);
+        FACADE.addGroupMember(gm1);
+        FACADE.addGroupMember(gm2);
+        FACADE.addGroupMember(gm3);
+        FACADE.addGroupMember(gm4);
     }
 
 }
