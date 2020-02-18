@@ -2,18 +2,16 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import entities.GroupMember;
 import utils.EMF_Creator;
 import facades.GroupMemberFacade;
-import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("groupmember")
-public class GroupMemberResource {
+@Path("coolJokes")
+public class CoolJokesResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
                 "pu",
@@ -31,11 +29,11 @@ public class GroupMemberResource {
         return "{\"msg\":\"Hello World\"}";
     }
     
-    @Path("all")
+    /*@Path("all")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getAllGroupMembers() {
-        List<GroupMember> list = FACADE.getAllGroupMembers();
+    public String getAllCoolJokes() {
+        List<CoolJoke> list = FACADE.getAllCoolJokes();
         return GSON.toJson(list);
-    }
+    }*/
 }

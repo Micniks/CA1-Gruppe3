@@ -34,15 +34,15 @@ public class SetupDummies {
         EntityManager em = EMF.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("CA1.deleteAllRows").executeUpdate();
+            em.createNamedQuery("GroupMember.deleteAllRows").executeUpdate();
             em.getTransaction().commit();
         } finally {
             em.close();
         }
-        GroupMember gm1 = new GroupMember("Andreas", "xxx", "xxx");
-        GroupMember gm2 = new GroupMember("Cahit", "xxx", "xxx");
-        GroupMember gm3 = new GroupMember("Marcus", "xxx", "xxx");
-        GroupMember gm4 = new GroupMember("Michael", "xxx", "xxx");
+        GroupMember gm1 = new GroupMember("Andreas", "cph-ap294", "Green");
+        GroupMember gm2 = new GroupMember("Cahit", "cph-cb342", "Green");
+        GroupMember gm3 = new GroupMember("Marcus", "cph-mj734", "Yellow");
+        GroupMember gm4 = new GroupMember("Michael", "cph-mk548", "Red");
         FACADE.addMovie(gm1);
         FACADE.addMovie(gm2);
         FACADE.addMovie(gm3);

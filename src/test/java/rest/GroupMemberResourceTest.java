@@ -62,10 +62,10 @@ public class GroupMemberResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        m1 = new GroupMember("Andreas", "xxx", "xxx");
-        m2 = new GroupMember("Cahit", "xxx", "xxx");
-        m3 = new GroupMember("Marcus", "xxx", "xxx");
-        m4 = new GroupMember("Michael", "xxx", "xxx");
+        m1 = new GroupMember("Andreas", "cph-ap294", "Green");
+        m2 = new GroupMember("Cahit", "cph-cb342", "Green");
+        m3 = new GroupMember("Marcus", "cph-mj734", "Yellow");
+        m4 = new GroupMember("Michael", "cph-mk548", "Red");
         try {
             em.getTransaction().begin();
             em.createNamedQuery("GroupMember.deleteAllRows").executeUpdate();
@@ -96,59 +96,15 @@ public class GroupMemberResourceTest {
         .body("msg", equalTo("Hello World"));   
     }
     
-//    @Test
-//    public void testCount() throws Exception {
-//        given()
-//        .contentType("application/json")
-//        .get("/movie/count").then()
-//        .assertThat()
-//        .statusCode(HttpStatus.OK_200.getStatusCode())
-//        .body("count", equalTo(5));   
-//    }
-//    
-//    @Test
-//    public void testAll() throws Exception {
-//        given()
-//        .contentType("application/json")
-//        .get("/movie/all")
-//        .then()
-//        .log().body()
-//        .assertThat()
-//        .statusCode(HttpStatus.OK_200.getStatusCode())
-//        .body("[0].actors", hasItem("Chuck Norris"));   
-//    }
-//    
-//    @Test
-//    public void testName() throws Exception {
-//        given()
-//        .contentType("application/json")
-//        .get("movie/name/"+m3.getName())
-//        .then()
-//        .assertThat()
-//        .statusCode(HttpStatus.OK_200.getStatusCode())
-//        .body("[0].name", equalTo(m3.getName()));   
-//    }
-//    
-//    @Test
-//    public void testNoName() throws Exception {
-//        given()
-//        .contentType("application/json")
-//        .get("movie/name/NoSuchNameListThis")
-//        .then()
-//        .assertThat()
-//        .statusCode(HttpStatus.OK_200.getStatusCode())
-//        .body(equalTo("[]"));   
-//    }
-//    
-//    @Test
-//    public void testID() throws Exception {
-//        
-//        given()
-//        .contentType("application/json")
-//        .get("movie/id/"+m1.getId().toString())
-//        .then()
-//        .assertThat()
-//        .statusCode(HttpStatus.OK_200.getStatusCode())
-//        .body("name", equalTo(m1.getName()));   
-//    }
+    @Test
+    public void testAll() throws Exception {
+        given()
+        .contentType("application/json")
+        .get("/groupmember/all")
+        .then()
+        .log().body()
+        .assertThat()
+        .statusCode(HttpStatus.OK_200.getStatusCode())
+        .body("[0].name", hasItem("Andreas"));   
+    }
 }
