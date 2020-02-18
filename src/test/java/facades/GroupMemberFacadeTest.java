@@ -61,8 +61,8 @@ public class GroupMemberFacadeTest {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("GroupMember.deleteAllRows").executeUpdate();
-            em.persist(new GroupMember("Cahit", "xxx", "xxx"));
-            em.persist(new GroupMember("Michael", "xxx", "xxx"));
+            em.persist(new GroupMember("Cahit", "cph-cb342", "Green"));
+            em.persist(new GroupMember("Michael", "cph-mk584", "Red"));
 
             em.getTransaction().commit();
         } finally {
