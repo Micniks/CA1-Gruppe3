@@ -62,10 +62,10 @@ public class GroupMemberResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        m1 = new GroupMember("Andreas", "xxx", "xxx");
-        m2 = new GroupMember("Cahit", "xxx", "xxx");
-        m3 = new GroupMember("Marcus", "xxx", "xxx");
-        m4 = new GroupMember("Michael", "xxx", "xxx");
+        m1 = new GroupMember("Andreas", "cph-ap294", "Green");
+        m2 = new GroupMember("Cahit", "cph-cb342", "Green");
+        m3 = new GroupMember("Marcus", "cph-mj734", "Yellow");
+        m4 = new GroupMember("Michael", "cph-mk548", "Red");
         try {
             em.getTransaction().begin();
             em.createNamedQuery("GroupMember.deleteAllRows").executeUpdate();
