@@ -21,11 +21,11 @@ import org.junit.jupiter.api.Test;
 import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
 
-public class CoolJokesResourceTest {
+public class OurCarsResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    //private static CoolJoke j1,j2,j3,j4;
+//    private static Car c1,c2,c3,c4;
     
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
@@ -56,17 +56,17 @@ public class CoolJokesResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-//        j1 = new CoolJoke("x", "D", "69");
-//        j2 = new CoolJoke("X", "d", "96");
-//        j3 = new CoolJoke("L", "o", "L");
-//        j4 = new CoolJoke("M", "a", "O");
+//        c1 = new Car(2016, "Mercedes", "C300");
+//        c2 = new Car(2019, "Audi", "Q7");
+//        c3 = new Car(1970, "Chevrolet", "Chevelle");
+//        c4 = new Car(1969, "Ford", "Mustang");
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("CoolJoke.deleteAllRows").executeUpdate();
-//            em.persist(j1);
-//            em.persist(j2); 
-//            em.persist(j3);
-//            em.persist(j4);
+            em.createNamedQuery("Cars.deleteAllRows").executeUpdate();
+//            em.persist(c1);
+//            em.persist(c2); 
+//            em.persist(c3);
+//            em.persist(c4);
             em.getTransaction().commit();
         } finally { 
             em.close();
@@ -76,48 +76,38 @@ public class CoolJokesResourceTest {
 //    @Test
 //    public void testServerIsUp() {
 //        System.out.println("Testing is server UP");
-//        given().when().get("/cooljoke").then().statusCode(200);
+//        given().when().get("/cars").then().statusCode(200);
 //    }
 //   
 //    @Test
 //    public void testDummyMsg() throws Exception {
 //        given()
 //        .contentType("application/json")
-//        .get("/cooljoke/").then()
+//        .get("/cars/").then()
 //        .assertThat()
 //        .statusCode(HttpStatus.OK_200.getStatusCode())
 //        .body("msg", equalTo("Hello World"));   
 //    }
 //    
 //    @Test
-//    public void testGetAllCoolJokes() throws Exception {
+//    public void testGetAllCars() throws Exception {
 //        given()
 //        .contentType("application/json")
-//        .get("/cooljoke/all")
+//        .get("/cars/all")
 //        .then()
 //        .log().body()
 //        .assertThat()
 //        .statusCode(HttpStatus.OK_200.getStatusCode())
-//        .body("[2].reference", equalTo("L"));   
+//        .body("[2].year", equalTo(1970));   
 //    }
 //    
 //    @Test
-//    public void testGetCoolJokeByID() throws Exception {
+//    public void testGetCarByID() throws Exception {
 //        given()
 //        .contentType("application/json")
-//        .get("/cooljoke/id/"+j1.getId()).then()
+//        .get("/cars/id/"+c1.getId()).then()
 //        .assertThat()
 //        .statusCode(HttpStatus.OK_200.getStatusCode())
-//        .body("name", equalTo(j1.getName()));  
-//    }
-//    
-//    @Test
-//    public void testGetRandomCoolJoke() throws Exception {
-//        given()
-//        .contentType("application/json")
-//        .get("/cooljoke/random").then()
-//        .assertThat()
-//        .statusCode(HttpStatus.OK_200.getStatusCode())
-//        .body("[1].id", equalTo(j2.getName()));  
+//        .body("name", equalTo(c1.getName()));  
 //    }
 }
