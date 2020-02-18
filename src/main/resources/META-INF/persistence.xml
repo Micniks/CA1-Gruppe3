@@ -4,8 +4,12 @@
   <persistence-unit name="pu" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>entities.GroupMember</class>
+<<<<<<< HEAD
     <class>entities.Car</class>
     <class>facades.CarFacade</class>
+=======
+    <class>entities.Joke</class>
+>>>>>>> dcbdff470c70212f5a03f88cf630cb9588f787e7
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!-- DO NOT remove the line below. It's not set by the  entityUtils.EMF_Creator -->
