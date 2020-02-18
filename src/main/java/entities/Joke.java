@@ -25,7 +25,7 @@ public class Joke implements Serializable {
     public Joke(String value, String reference, String type, String author) {
         this.value = value;
         if (reference != null) {
-            if (reference.length() == 0) {
+            if (reference.length() > 0) {
                 this.reference = reference;
             }
         }

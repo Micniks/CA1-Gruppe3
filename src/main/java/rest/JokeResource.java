@@ -51,7 +51,7 @@ public class JokeResource {
         return GSON.toJson(list);
     }
 
-    @Path("/random")
+    @Path("random")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getRandomJoke(@PathParam("name") String name) {
