@@ -40,11 +40,11 @@ public class GroupMemberFacade {
     }
 
     //TODO Remove/Change this before use
-    public long getMovieCount() {
+    public long getGroupMemberCount() {
         EntityManager em = emf.createEntityManager();
         try {
-            long movieCount = (long) em.createQuery("SELECT COUNT(m) FROM Movie m").getSingleResult();
-            return movieCount;
+            long membersCount = (long) em.createQuery("SELECT COUNT(m) FROM GroupMember m").getSingleResult();
+            return membersCount;
         } finally {
             em.close();
         }
@@ -54,17 +54,17 @@ public class GroupMemberFacade {
         EntityManager em = emf.createEntityManager();
         try {
             //TypedQuery<GroupMember> tq = em.createQuery("SELECT m FROM Movie m order by m.name desc", GroupMember.class);
-            TypedQuery<GroupMember> tq = em.createQuery("SELECT m FROM GroupMember m", GroupMember.class);
+            TypedQuery<GroupMember> tq = em.createQuery("SELECT m FROM GroupMember m ORDER BY m.name asc", GroupMember.class);
             return GroupMemberDTO.convertList(tq.getResultList());
         } finally {
             em.close();
         }
     }
 
-    public GroupMember getMovieID(Long id) {
+    public GroupMember getGroupMmeberId(Long id) {
         EntityManager em = emf.createEntityManager();
         try {
-            TypedQuery<GroupMember> tq = em.createQuery("SELECT m FROM Movie m WHERE m.id = :id", GroupMember.class);
+            TypedQuery<GroupMember> tq = em.createQuery("SELECT m FROM GroupMember m WHERE m.id = :id", GroupMember.class);
             tq.setParameter("id", id);
             GroupMember result = tq.getSingleResult();
             return result;
@@ -73,13 +73,13 @@ public class GroupMemberFacade {
         }
     }
 
-    public GroupMember addMovie(GroupMember movie) {
+    public GroupMember addGroupMember(GroupMember member) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(movie);
+            em.persist(member);
             em.getTransaction().commit();
-            return movie;
+            return member;
         } finally {
             em.close();
         }
