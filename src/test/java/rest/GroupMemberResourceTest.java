@@ -1,6 +1,6 @@
 package rest;
 
-import entities.Movie;
+import entities.GroupMember;
 import utils.EMF_Creator;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
@@ -24,11 +24,11 @@ import org.junit.jupiter.api.Test;
 import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
 
-public class MovieResourceTest {
+public class GroupMemberResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    private static Movie m1,m2,m3,m4,m5;
+    private static GroupMember m1,m2,m3,m4;
     
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
@@ -62,19 +62,17 @@ public class MovieResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        m1 = new Movie(1993, "Law & Order", new String[]{"Andreas"}, 3.0, 13);
-        m2 = new Movie(1997, "Chaos Riders", new String[]{"Michael", "Marcus", "Cahit"}, 4.3, 18);
-        m3 = new Movie(2003, "The First Humans", new String[]{"Adam", "Eve", "Chuck Norris"}, 0.3, 8);
-        m4 = new Movie(2005, "The First", new String[]{"Chuck Norris"}, 9.9, 18);
-        m5 = new Movie(2019, "Last", new String[]{"Chuck Norris"}, 10.0, 18);
+        m1 = new GroupMember("Andreas", "xxx", "xxx");
+        m2 = new GroupMember("Cahit", "xxx", "xxx");
+        m3 = new GroupMember("Marcus", "xxx", "xxx");
+        m4 = new GroupMember("Michael", "xxx", "xxx");
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("Movie.deleteAllRows").executeUpdate();
+            em.createNamedQuery("GroupMember.deleteAllRows").executeUpdate();
             em.persist(m1);
             em.persist(m2); 
             em.persist(m3);
             em.persist(m4);
-            em.persist(m5);
             em.getTransaction().commit();
         } finally { 
             em.close();
@@ -84,7 +82,7 @@ public class MovieResourceTest {
     @Test
     public void testServerIsUp() {
         System.out.println("Testing is server UP");
-        given().when().get("/movie").then().statusCode(200);
+        given().when().get("/groupmember").then().statusCode(200);
     }
    
     //This test assumes the database contains two rows
@@ -92,65 +90,65 @@ public class MovieResourceTest {
     public void testDummyMsg() throws Exception {
         given()
         .contentType("application/json")
-        .get("/movie/").then()
+        .get("/groupmember/").then()
         .assertThat()
         .statusCode(HttpStatus.OK_200.getStatusCode())
         .body("msg", equalTo("Hello World"));   
     }
     
-    @Test
-    public void testCount() throws Exception {
-        given()
-        .contentType("application/json")
-        .get("/movie/count").then()
-        .assertThat()
-        .statusCode(HttpStatus.OK_200.getStatusCode())
-        .body("count", equalTo(5));   
-    }
-    
-    @Test
-    public void testAll() throws Exception {
-        given()
-        .contentType("application/json")
-        .get("/movie/all")
-        .then()
-        .log().body()
-        .assertThat()
-        .statusCode(HttpStatus.OK_200.getStatusCode())
-        .body("[0].actors", hasItem("Chuck Norris"));   
-    }
-    
-    @Test
-    public void testName() throws Exception {
-        given()
-        .contentType("application/json")
-        .get("movie/name/"+m3.getName())
-        .then()
-        .assertThat()
-        .statusCode(HttpStatus.OK_200.getStatusCode())
-        .body("[0].name", equalTo(m3.getName()));   
-    }
-    
-    @Test
-    public void testNoName() throws Exception {
-        given()
-        .contentType("application/json")
-        .get("movie/name/NoSuchNameListThis")
-        .then()
-        .assertThat()
-        .statusCode(HttpStatus.OK_200.getStatusCode())
-        .body(equalTo("[]"));   
-    }
-    
-    @Test
-    public void testID() throws Exception {
-        
-        given()
-        .contentType("application/json")
-        .get("movie/id/"+m1.getId().toString())
-        .then()
-        .assertThat()
-        .statusCode(HttpStatus.OK_200.getStatusCode())
-        .body("name", equalTo(m1.getName()));   
-    }
+//    @Test
+//    public void testCount() throws Exception {
+//        given()
+//        .contentType("application/json")
+//        .get("/movie/count").then()
+//        .assertThat()
+//        .statusCode(HttpStatus.OK_200.getStatusCode())
+//        .body("count", equalTo(5));   
+//    }
+//    
+//    @Test
+//    public void testAll() throws Exception {
+//        given()
+//        .contentType("application/json")
+//        .get("/movie/all")
+//        .then()
+//        .log().body()
+//        .assertThat()
+//        .statusCode(HttpStatus.OK_200.getStatusCode())
+//        .body("[0].actors", hasItem("Chuck Norris"));   
+//    }
+//    
+//    @Test
+//    public void testName() throws Exception {
+//        given()
+//        .contentType("application/json")
+//        .get("movie/name/"+m3.getName())
+//        .then()
+//        .assertThat()
+//        .statusCode(HttpStatus.OK_200.getStatusCode())
+//        .body("[0].name", equalTo(m3.getName()));   
+//    }
+//    
+//    @Test
+//    public void testNoName() throws Exception {
+//        given()
+//        .contentType("application/json")
+//        .get("movie/name/NoSuchNameListThis")
+//        .then()
+//        .assertThat()
+//        .statusCode(HttpStatus.OK_200.getStatusCode())
+//        .body(equalTo("[]"));   
+//    }
+//    
+//    @Test
+//    public void testID() throws Exception {
+//        
+//        given()
+//        .contentType("application/json")
+//        .get("movie/id/"+m1.getId().toString())
+//        .then()
+//        .assertThat()
+//        .statusCode(HttpStatus.OK_200.getStatusCode())
+//        .body("name", equalTo(m1.getName()));   
+//    }
 }

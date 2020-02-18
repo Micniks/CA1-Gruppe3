@@ -1,7 +1,7 @@
 package facades;
 
-import dto.MovieDTO;
-import entities.Movie;
+import dto.GroupMemberDTO;
+import entities.GroupMember;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -13,13 +13,13 @@ import javax.persistence.TypedQuery;
  *
  * Rename Class to a relevant name Add add relevant facade methods
  */
-public class MovieFacade {
+public class GroupMemberFacade {
 
-    private static MovieFacade instance;
+    private static GroupMemberFacade instance;
     private static EntityManagerFactory emf;
     
     //Private Constructor to ensure Singleton
-    private MovieFacade() {}
+    private GroupMemberFacade() {}
     
     
     /**
@@ -27,10 +27,10 @@ public class MovieFacade {
      * @param _emf
      * @return an instance of this facade class.
      */
-    public static MovieFacade getFacadeExample(EntityManagerFactory _emf) {
+    public static GroupMemberFacade getFacadeExample(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
-            instance = new MovieFacade();
+            instance = new GroupMemberFacade();
         }
         return instance;
     }
@@ -50,25 +50,25 @@ public class MovieFacade {
         }
     }
     
-    public List<Movie> getAllMovies(){
+    public List<GroupMember> getAllMovies(){
         EntityManager em = emf.createEntityManager();
         try{
-            TypedQuery<Movie> tq = em.createQuery("SELECT m FROM Movie m order by m.name desc", Movie.class);
+            TypedQuery<GroupMember> tq = em.createQuery("SELECT m FROM Movie m order by m.name desc", GroupMember.class);
             return tq.getResultList();
         }finally{  
             em.close();
         }
     }
     
-    public List<MovieDTO> getMovieName(String name){
+    public List<GroupMemberDTO> getMovieName(String name){
         EntityManager em = emf.createEntityManager();
         try{
-            TypedQuery<Movie> tq = em.createQuery("SELECT m FROM Movie m WHERE m.name = :name", Movie.class);
+            TypedQuery<GroupMember> tq = em.createQuery("SELECT m FROM Movie m WHERE m.name = :name", GroupMember.class);
             tq.setParameter("name", name);
-            List<Movie> movies = tq.getResultList();
-            List<MovieDTO> result = new ArrayList<MovieDTO>();
-            for (Movie movie : movies) {
-                result.add(new MovieDTO(movie));
+            List<GroupMember> movies = tq.getResultList();
+            List<GroupMemberDTO> result = new ArrayList<GroupMemberDTO>();
+            for (GroupMember movie : movies) {
+                result.add(new GroupMemberDTO(movie));
             }
             return result;
         }finally{  
@@ -76,19 +76,19 @@ public class MovieFacade {
         }
     }
     
-    public Movie getMovieID(Long id){
+    public GroupMember getMovieID(Long id){
         EntityManager em = emf.createEntityManager();
         try{
-            TypedQuery<Movie> tq = em.createQuery("SELECT m FROM Movie m WHERE m.id = :id", Movie.class);
+            TypedQuery<GroupMember> tq = em.createQuery("SELECT m FROM Movie m WHERE m.id = :id", GroupMember.class);
             tq.setParameter("id", id);
-            Movie result = tq.getSingleResult();
+            GroupMember result = tq.getSingleResult();
             return result;
         }finally{  
             em.close();
         }
     }
     
-    public Movie addMovie(Movie movie){
+    public GroupMember addMovie(GroupMember movie){
         EntityManager em = emf.createEntityManager();
         try{
             em.getTransaction().begin();
