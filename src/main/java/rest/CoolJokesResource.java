@@ -7,10 +7,11 @@ import facades.GroupMemberFacade;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("coolJokes")
+@Path("cooljoke")
 public class CoolJokesResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
@@ -29,11 +30,27 @@ public class CoolJokesResource {
         return "{\"msg\":\"Hello World\"}";
     }
     
-    /*@Path("all")
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String getAllCoolJokes() {
-        List<CoolJoke> list = FACADE.getAllCoolJokes();
-        return GSON.toJson(list);
-    }*/
+//    @Path("/all")
+//    @GET
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public String getAllCoolJokes() {
+//        List<CoolJoke> list = FACADE.getAllCoolJokes();
+//        return GSON.toJson(list);
+//    }
+//    
+//    @Path("/id/{id}")
+//    @GET
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public String getJokeByID(@PathParam("id") int id) {
+//        CoolJoke joke = FACADE.getCoolJokeID(id);
+//        return GSON.toJson(joke);
+//    }
+//    
+//    @Path("/random")
+//    @GET
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public String getRandomJoke() {
+//        CoolJoke joke = getRandomJoke();
+//        return GSON.toJson(joke);
+//    }
 }
