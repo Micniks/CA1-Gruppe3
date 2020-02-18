@@ -2,6 +2,7 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dto.GroupMemberDTO;
 import entities.GroupMember;
 import utils.EMF_Creator;
 import facades.GroupMemberFacade;
@@ -35,7 +36,7 @@ public class GroupMemberResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllGroupMembers() {
-        List<GroupMember> list = FACADE.getAllGroupMembers();
+        List<GroupMemberDTO> list = FACADE.getAllGroupMembers();
         return GSON.toJson(list);
     }
 }
