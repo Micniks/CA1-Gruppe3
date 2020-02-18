@@ -8,10 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
-/**
- *
- * @author Bruger
- */
 public class JokeFacade {
 
     private final static Random RANDOM = new Random();
