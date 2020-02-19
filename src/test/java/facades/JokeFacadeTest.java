@@ -105,7 +105,7 @@ public class JokeFacadeTest {
         assertTrue(newJoke.getValue().equals(result.getValue()));
 
         List<JokeDTO> dbResults = facade.getAllJokes();
-        
+
         boolean foundMatchingJoke = false;
         for (JokeDTO joke : dbResults) {
             if (joke.getId() == result.getId() && joke.getValue().equals(result.getValue())) {
@@ -221,7 +221,8 @@ public class JokeFacadeTest {
 
             //Try and see how evenly spread the results would be over multiple calls
             int[] results = new int[5];
-            for (int j = 0; j < 1000000; j++) {
+            int testRunAmount = 1000000;
+            for (int j = 0; j < testRunAmount; j++) {
 
                 // Calling the test-method here
                 JokeDTO result = facade.getRandomJoke(list);
@@ -234,9 +235,16 @@ public class JokeFacadeTest {
                     }
                 }
             }
-
-            //Assert that the results are distributed reasonably evenly
-            int expectedResultAmount = 150000;
+            /*
+             Assert that the results are distributed reasonably evenly
+              It is expected that each result should appear roughly an equal 
+              amount of times, which for 5 jokes would be around 20% of the time.
+              To allow for a margin for the random nature, we expect for the test
+              that each of the results have appeared about 15% of the time.
+             */
+            int expectedResultProcentage = 15;
+            int expectedResultAmount = (testRunAmount / 100) * expectedResultProcentage;
+            
             assertTrue(results[0] > expectedResultAmount);
             assertTrue(results[1] > expectedResultAmount);
             assertTrue(results[2] > expectedResultAmount);
