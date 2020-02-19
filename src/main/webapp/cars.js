@@ -63,6 +63,8 @@ function findCarOnMake() {
                         document.getElementById("result").innerHTML = "<p>No such search exist</p>";
                     }
                 });
+    } else {
+        document.getElementById("result").innerHTML = "<p>Please put in a search for a maker</p>";
     }
 
 }
@@ -104,3 +106,4 @@ function insertIntoTableFooters(cars) {
 ;
 
 changeText();
+document.getElementById("result").innerHTML = "<p></p>";
