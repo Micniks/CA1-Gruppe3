@@ -13,6 +13,7 @@ import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,7 +58,7 @@ public class CarFacadeTest {
             em.createNamedQuery("Car.deleteAllRows").executeUpdate();
             car1 = new Car(1983, "Volvo", "242 Turbo Evo", 85500, "Red");
             car2 = new Car(1995, "Nissan", "Skyline R33 GTR", 120000, "Midnight Purple");
-            car3 = new Car(2020, "Ford", "F-150 Raptor", 450000, "Blue");
+            car3 = new Car(2020, "Nissan", "F-150 Raptor", 450000, "Blue");
             car4 = new Car(2020, "Jeep", "Cherokee Trackhawk", 63000, "Bourdeaux");
             car5 = new Car(1986, "BMW", "325i E30", 5000, "White");
             em.persist(car1);
@@ -158,10 +159,51 @@ public class CarFacadeTest {
 
         Car car = new Car(2015, "VW", "Phaeton 4,2 V8", 900000, "Black");
         Car result = facade.addCar(car);
-        
+
         assertEquals(car.getId(), result.getId());
         assertEquals(newCarCount, facade.getAllCars().size());
 
     }
 
+    @Test
+    public void testGetCarByMake() {
+        Car expectedCar = car1;
+        List<CarDTO> result = facade.getCarMake(expectedCar.getMake());
+        int expectedResultSize = 1;
+        assertEquals(expectedResultSize, result.size());
+        assertEquals(expectedCar.getId(), result.get(0).getId());
+        assertTrue(expectedCar.getMake().equals(result.get(0).getMake()));
+
+    }
+
+    @Test
+    public void testGetCarByMake_Multiple() {
+        Car expectedCar1 = car2;
+        Car expectedCar2 = car3;
+        if (expectedCar1.getMake() != expectedCar2.getMake()) {
+            fail("Not the same maker");
+        }
+        List<CarDTO> result = facade.getCarMake(expectedCar1.getMake());
+        int expectedResultSize = 2;
+        assertEquals(expectedResultSize, result.size());
+        for (CarDTO carDTO : result) {
+            assertTrue(expectedCar1.getId() == carDTO.getId() || expectedCar2.getId() == carDTO.getId());
+            assertTrue(expectedCar1.getMake().equals(carDTO.getMake()));
+            assertTrue(expectedCar2.getMake().equals(carDTO.getMake()));
+        }
+
+    }
+    
+    @Test
+    public void testGetCarByMake_NoResult() {
+        String make = "No such Make";
+        for (Car car : carArray) {
+            if(car.getMake().equals(make)){
+                fail("A car with the noSuchMake string exist");
+            }
+        }
+        List<CarDTO> result = facade.getCarMake(make);
+        int expectedResultSize = 0;
+        assertEquals(expectedResultSize, result.size());
+    }
 }
