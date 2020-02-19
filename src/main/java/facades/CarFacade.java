@@ -12,7 +12,7 @@ public class CarFacade {
     private static CarFacade instance;
     private static EntityManagerFactory emf;
 
-    private CarFacade() {
+    public CarFacade() {
     }
 
     public static CarFacade getCarFacade(EntityManagerFactory _emf) {
