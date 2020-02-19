@@ -14,6 +14,11 @@ function clickRandom(evt){
     randomJoke();
 }
 
+function clickSearch(evt) {
+    evt.preventDefault();
+    findJoke();
+};
+
 function changeText() {
     let url = "api/joke/all";
     fetch(url)
@@ -34,6 +39,18 @@ function randomJoke() {
             });
 }
 document.getElementById("random").addEventListener("click", clickRandom);
+
+function findJoke() {
+    let searchId = document.getElementById("idTxt").value;
+    let url = "api/joke/id/"+ searchId;
+    fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                console.log("data", data);
+                document.getElementById("result").innerHTML = "<p>" + data["value"] + "</p>";
+            });
+}
+document.getElementById("searchBtn").addEventListener("click", clickSearch);
 
 function insertIntoTableHeaders(map) {
     let headers = Object.getOwnPropertyNames(map[0]);

@@ -4,7 +4,7 @@ function clicker(evt){
 }
 
 function changeText() {
-    let url = "api/cars/all";
+    let url = "api/car/all";
     fetch(url)
             .then(res => res.json())
             .then(data => {
