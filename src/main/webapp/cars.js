@@ -24,8 +24,8 @@ function changeText() {
 
 function findCarOnID() {
     let searchId = document.getElementById("idTxt").value;
-    let url = "api/car/id/" + searchId;
-    if (searchId.length > 0 && Number.isNaN(searchId)) {
+    let url = "api/car/id/" + parseInt(searchId);
+    if (searchId.length > 0 && !Number.isNaN(parseInt(searchId))) {
         fetch(url)
                 .then(res => res.json())
                 .then(data => {
