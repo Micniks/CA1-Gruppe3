@@ -1,7 +1,5 @@
 package entities;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import facades.CarFacade;
 import facades.GroupMemberFacade;
 import facades.JokeFacade;
@@ -21,7 +19,6 @@ public class SetupDummies {
     private static final GroupMemberFacade GROUP_FACADE = GroupMemberFacade.getFacadeExample(EMF);
     private static final JokeFacade JOKE_FACADE = JokeFacade.getFacadeExample(EMF);
     private static final CarFacade CAR_FACADE = CarFacade.getCarFacade(EMF);
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     public static void main(String[] args) {
         EntityManager em = EMF.createEntityManager();
@@ -36,10 +33,20 @@ public class SetupDummies {
         }
         addGroupMembers();
         addJokes();
-        
-        
+        addCars();
     }
 
+    private static void addGroupMembers() {
+        GroupMember gm1 = new GroupMember("Andreas", "cph-ap294", "Green");
+        GroupMember gm2 = new GroupMember("Cahit", "cph-cb342", "Green");
+        GroupMember gm3 = new GroupMember("Marcus", "cph-mj734", "Yellow");
+        GroupMember gm4 = new GroupMember("Michael", "cph-mk548", "Red");
+        GROUP_FACADE.addGroupMember(gm1);
+        GROUP_FACADE.addGroupMember(gm2);
+        GROUP_FACADE.addGroupMember(gm3);
+        GROUP_FACADE.addGroupMember(gm4);
+    }
+    
     private static void addJokes() {
         Joke joke1 = new Joke("Why did the chicken cross the road? To get to the other side!", "", "old", "unknown");
         Joke joke2 = new Joke("Knock Knock\nWho is there\nBad\nBad who?\nThis is a bad joke", "", "bad", "Michael");
@@ -52,17 +59,8 @@ public class SetupDummies {
         JOKE_FACADE.addJoke(joke4);
         JOKE_FACADE.addJoke(joke5);
     }
-
-    private static void addGroupMembers() {
-        GroupMember gm1 = new GroupMember("Andreas", "cph-ap294", "Green");
-        GroupMember gm2 = new GroupMember("Cahit", "cph-cb342", "Green");
-        GroupMember gm3 = new GroupMember("Marcus", "cph-mj734", "Yellow");
-        GroupMember gm4 = new GroupMember("Michael", "cph-mk548", "Red");
-        GROUP_FACADE.addGroupMember(gm1);
-        GROUP_FACADE.addGroupMember(gm2);
-        GROUP_FACADE.addGroupMember(gm3);
-        GROUP_FACADE.addGroupMember(gm4);
-        
+    
+    private static void addCars() {
         Car car1 = new Car(1983, "Volvo","242 Turbo Evo", 85500, "Red");
         Car car2 = new Car(1995, "Nissan", "Skyline R33 GTR", 120000, "Midnight Purple");
         Car car3 = new Car(2020, "Ford","F-150 Raptor",450000, "Blue");
