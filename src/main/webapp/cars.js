@@ -32,13 +32,16 @@ function findCarOnID() {
                     console.log("data", data);
                     if (data !== null) {
                         document.getElementById("table_id").innerHTML = "<table>" + insertIntoTableHeaders(data) + insertIntoTableFooters(data) + "</table>";
+                        document.getElementById("result").innerHTML = "<p></p>";
                     } else {
                         console.log("error");
                         document.getElementById("result").innerHTML = "<p>No such search exist</p>";
+                        changeText();
                     }
 
                 });
     } else {
+        changeText();
         document.getElementById("result").innerHTML = "<p>Please use a number</p>";
     }
 }
@@ -54,8 +57,9 @@ function findCarOnMake() {
                     console.log("data", data);
                     if (Array.isArray(data) && data.length > 0) {
                         document.getElementById("table_id").innerHTML = "<table>" + insertIntoTableHeaders(data) + insertIntoTableFooters(data) + "</table>";
+                        document.getElementById("result").innerHTML = "<p></p>";
                     } else {
-                        console.log("error");
+                        changeText();
                         document.getElementById("result").innerHTML = "<p>No such search exist</p>";
                     }
                 });
