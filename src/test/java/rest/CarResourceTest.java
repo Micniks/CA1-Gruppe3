@@ -97,9 +97,19 @@ public class CarResourceTest {
         .contentType("application/json")
         .get("/car/all")
         .then()
-        .log().body()
         .assertThat()
         .statusCode(HttpStatus.OK_200.getStatusCode())
         .body("[1].model", equalTo("325i E30"));   
+    }
+    
+    @Test
+    public void testGetCarByID() throws Exception {
+        given()
+        .contentType("application/json")
+        .get("/car/id/"+c2.getId())
+        .then()
+        .assertThat()
+        .statusCode(HttpStatus.OK_200.getStatusCode())
+        .body("make", equalTo(c2.getMake()));   
     }
 }
