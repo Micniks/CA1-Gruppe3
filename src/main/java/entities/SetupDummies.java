@@ -65,11 +65,17 @@ public class SetupDummies {
         Car car2 = new Car(1995, "Nissan", "Skyline R33 GTR", 120000, "Midnight Purple");
         Car car3 = new Car(2020, "Ford","F-150 Raptor",450000, "Blue");
         Car car4 = new Car(2020, "Jeep", "Cherokee Trackhawk", 63000, "Bourdeaux");
-        Car car5 = new Car(1986, "BMW", "325i E30", 5000, "White");
+        Car car5 = new Car(1995, "Volvo", "850 t5-r", 98500, "Yellow");
+        Car car6 = new Car(1986, "BMW", "325i E30", 8000, "White");
+        Car car7 = new Car(1990, "BMW", "850i V12", 785000, "Black");
+        Car car8 = new Car(1990, "Toyota", "Supra MK3", 266000, "Perl Blue");
         CAR_FACADE.addCar(car1);
         CAR_FACADE.addCar(car2);
         CAR_FACADE.addCar(car3);
         CAR_FACADE.addCar(car4);
         CAR_FACADE.addCar(car5);
+        CAR_FACADE.addCar(car6);
+        CAR_FACADE.addCar(car7);
+        CAR_FACADE.addCar(car8);
     }
 }
