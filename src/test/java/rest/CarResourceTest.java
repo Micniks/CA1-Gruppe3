@@ -112,4 +112,15 @@ public class CarResourceTest {
         .statusCode(HttpStatus.OK_200.getStatusCode())
         .body("make", equalTo(c2.getMake()));   
     }
+    
+    @Test
+    public void testGetCarByMake() throws Exception {
+        given()
+        .contentType("application/json")
+        .get("/car/make/"+c2.getMake())
+        .then()
+        .assertThat()
+        .statusCode(HttpStatus.OK_200.getStatusCode())
+        .body("[0].id", equalTo(Math.toIntExact(c2.getId())));   
+    }
 }
