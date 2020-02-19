@@ -5,6 +5,7 @@ import entities.Car;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 public class CarFacade {
@@ -54,6 +55,19 @@ public class CarFacade {
             tq.setParameter("id", id);
             Car result = tq.getSingleResult();
             return result;
+        } catch (NoResultException ex) {
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<CarDTO> getCarMake(String make) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Car> tq = em.createQuery("SELECT c FROM Car c WHERE c.make = :make", Car.class);
+            tq.setParameter("make", make);
+            return CarDTO.convertList(tq.getResultList());
         } finally {
             em.close();
         }
