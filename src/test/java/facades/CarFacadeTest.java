@@ -138,8 +138,7 @@ public class CarFacadeTest {
 
     }
 
-    
-        @Test
+    @Test
     public void testGetCarByID() {
         for (Car expectedCar : carArray) {
             long id = expectedCar.getId();
@@ -151,10 +150,18 @@ public class CarFacadeTest {
 
         assertTrue(carArray.length > 0);
     }
-    
-  
-        
-    }
-    
-    
 
+    @Test
+    public void testAddCar() {
+
+        long newCarCount = facade.getCarCount() + 1;
+
+        Car car = new Car(2015, "VW", "Phaeton 4,2 V8", 900000, "Black");
+        Car result = facade.addCar(car);
+        
+        assertEquals(car.getId(), result.getId());
+        assertEquals(newCarCount, facade.getAllCars().size());
+
+    }
+
+}
